@@ -1,6 +1,6 @@
 function getNames(folder) {
     return folder.folders.map(f => f.name) // All the folder names
-            .concat(folder.files.map(f => f.name)) // AND all the file names
+            .concat(folder.files.map(f => f.name + f.ext)) // AND all the file names
 }
 
 function getSizes(folder) {

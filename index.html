@@ -33,8 +33,11 @@
 
     $(".chart").click((event) => {
       var chunk = chart.getElementAtEvent(event)[0]
+      if (!chunk) return
       var name = chart.data.labels[chunk._index]
-      curr = curr.folders.find(f => f.name == name)
+      var folder = curr.folders.find(f => f.name == name)
+      if (!folder) return
+      curr = folder
       chart.data = gen_data(curr)
       chart.update()
     })
