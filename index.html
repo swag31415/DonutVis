@@ -20,29 +20,24 @@
   <script src="resources\js\data.js"></script>
   <script>
     var ctx = $('.chart').get(0).getContext('2d')
-    var names = getNames(main_folder)
-    var sizes = getSizes(main_folder)
+    var curr = main_folder
     var chart = new Chart(ctx, {
-      // The type of chart we want to create
       type: 'doughnut',
-
-      // The data for our dataset
-      data: {
-        labels: names,
-        datasets: [{
-          label: 'My First dataset',
-          backgroundColor: pattern.generate(gen_colors(names.length)),
-          data: sizes
-        }]
-      },
-
-      // Configuration options go here
+      data: gen_data(curr),
       options: {
         legend: {
           position: "right"
         }
       }
     });
+
+    $(".chart").click((event) => {
+      var chunk = chart.getElementAtEvent(event)[0]
+      var name = chart.data.labels[chunk._index]
+      curr = curr.folders.find(f => f.name == name)
+      chart.data = gen_data(curr)
+      chart.update()
+    })
   </script>
 </head>
 
