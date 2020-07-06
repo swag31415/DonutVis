@@ -2,11 +2,48 @@
 <html>
 
 <body>
+  <canvas class="chart"></canvas>
 </body>
 
 <head>
   <title>DonutVis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="resources\css\styles.css">
+  </link>
+
+  <script src="vendors\charts\chart.js"></script>
+  <script src="vendors\jquery\jquery-3.5.1.slim.min.js"></script>
+  <script src="vendors\charts\patternomaly.min.js"></script>
+  <script src="resources\js\RandColor.js"></script>
+  <script src="resources\js\Parser.js"></script>
+  <script src="resources\js\data.js"></script>
+  <script>
+    var ctx = $('.chart').get(0).getContext('2d')
+    var names = getNames(main_folder)
+    var sizes = getSizes(main_folder)
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'doughnut',
+
+      // The data for our dataset
+      data: {
+        labels: names,
+        datasets: [{
+          label: 'My First dataset',
+          backgroundColor: pattern.generate(gen_colors(names.length)),
+          data: sizes
+        }]
+      },
+
+      // Configuration options go here
+      options: {
+        legend: {
+          position: "right"
+        }
+      }
+    });
+  </script>
 </head>
 
 </html>

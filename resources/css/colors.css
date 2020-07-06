@@ -1,0 +1,12 @@
+:root {
+    --gunmetal: #292F36;
+    --turquoise: #4ECDC4;
+    --cream: #F7FFF7;
+    --bittersweet: #FF6B6B;
+    --yellow: #FFE66D;
+}
+
+body {
+    background-color: var(--cream);
+    color: var(--gunmetal);
+}
