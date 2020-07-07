@@ -1,0 +1,7 @@
+#back_button {
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
