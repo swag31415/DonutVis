@@ -4,14 +4,18 @@
 <body>
   <canvas class="chart"></canvas>
   <button id="back_button" onclick="location.reload()">Top</button>
+  <label class="toggle-control">
+    <input type="checkbox">
+    <span class="control"></span>
+  </label>
 </body>
 
 <head>
   <title>DonutVis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="resources\css\styles.css">
-  </link>
+  <link rel="stylesheet" href="resources\css\styles.css"></link>
+  <link rel="stylesheet" href="vendors\toggle.css"></link>
 
   <script src="vendors\charts\chart.js"></script>
   <script src="vendors\jquery\jquery-3.5.1.slim.min.js"></script>
@@ -20,11 +24,12 @@
   <script src="resources\js\Parser.js"></script>
   <script src="resources\js\data.js"></script>
   <script>
+    var by_ext = false
     var ctx = $('.chart').get(0).getContext('2d')
     var curr = main_folder
     var chart = new Chart(ctx, {
       type: 'doughnut',
-      data: gen_data(curr),
+      data: gen_data(curr, by_ext),
       options: {
         legend: {
           position: "right"
@@ -39,7 +44,13 @@
       var folder = curr.folders.find(f => f.name == name)
       if (!folder) return
       curr = folder
-      chart.data = gen_data(curr)
+      chart.data = gen_data(curr, by_ext)
+      chart.update()
+    })
+
+    $(".control").click(() => {
+      by_ext = !by_ext
+      chart.data = gen_data(curr, by_ext)
       chart.update()
     })
   </script>
